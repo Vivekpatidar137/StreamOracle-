@@ -1,0 +1,72 @@
+import { useState } from "react";
+import Header from "./Header";
+
+const Login = () => {
+  const [isSignInForm, setIsSignInForm] = useState(true);
+
+  const toggleSignInForm = () => {
+    setIsSignInForm(!isSignInForm);
+  };
+  return (
+    <div className="relative h-screen">
+      <Header />
+      <div className="h-full">
+        <img
+          src="https://assets.nflxext.com/ffe/siteui/vlv3/7c0e18aa-2c95-474d-802e-7f30e75dcca4/web/IN-en-20241014-TRIFECTA-perspective_e7121311-c11e-4809-a3e6-22abffa33569_small.jpg"
+          alt="background"
+          className="w-full h-full object-cover"
+        />
+      </div>
+
+      <div className="absolute inset-0 bg-black bg-opacity-60 flex justify-center items-center">
+        <form className="bg-black bg-opacity-65 p-12 rounded-md w-full max-w-md">
+          <h2 className="text-white text-3xl font-semibold mb-8">
+            {isSignInForm ? "Sign In" : "Sign Up"}
+          </h2>
+
+          {!isSignInForm && (
+            <input
+              type="text"
+              placeholder="Full Name"
+              className="w-full p-3 mb-5 rounded-md bg-gray-800 border border-gray-600 text-white"
+            />
+          )}
+
+          <input
+            type="text"
+            placeholder="Email Address"
+            className="w-full p-3 mb-5 rounded-md bg-gray-800 border border-gray-600 text-white"
+          />
+
+          <input
+            type="password"
+            placeholder="Password"
+            className="w-full p-3 mb-7 rounded-md bg-gray-800 border border-gray-600 text-white"
+          />
+
+          <button
+            type="submit"
+            className="w-full bg-red-600 text-white p-3 rounded-md font-semibold hover:bg-red-700 transition-colors"
+          >
+            {isSignInForm ? "Sign In" : "Sign Up"}
+          </button>
+
+          <div className="mt-4 text-gray-400 flex text-lg p-2">
+            <span>
+              {isSignInForm ? "New to StreamOracle?" : "Existing User?"}
+            </span>
+            <p
+              onClick={toggleSignInForm}
+              className="text-white hover:underline pl-1 cursor-pointer"
+            >
+              {isSignInForm ? "Sign up now" : "Sign In now"}
+            </p>
+            .
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default Login;
