@@ -1,9 +1,22 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Header from "./Header";
-
+import { checkValidData } from "../utils/validate";
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
+  const [errorMessage, setErrorMessage] = useState();
 
+  const name = useRef(null);
+  const email = useRef(null);
+  const password = useRef(null);
+
+  const handleButtonClick = () => {
+    const message = checkValidData(
+      name.current.value,
+      email.current.value,
+      password.current.value
+    );
+    setErrorMessage(message);
+  };
   const toggleSignInForm = () => {
     setIsSignInForm(!isSignInForm);
   };
@@ -19,13 +32,17 @@ const Login = () => {
       </div>
 
       <div className="absolute inset-0 bg-black bg-opacity-60 flex justify-center items-center">
-        <form className="bg-black bg-opacity-65 p-12 rounded-md w-full max-w-md">
+        <form
+          onSubmit={(e) => e.preventDefault()}
+          className="bg-black bg-opacity-65 p-12 rounded-md w-full max-w-md"
+        >
           <h2 className="text-white text-3xl font-semibold mb-8">
             {isSignInForm ? "Sign In" : "Sign Up"}
           </h2>
 
           {!isSignInForm && (
             <input
+              ref={name}
               type="text"
               placeholder="Full Name"
               className="w-full p-3 mb-5 rounded-md bg-gray-800 border border-gray-600 text-white"
@@ -33,24 +50,33 @@ const Login = () => {
           )}
 
           <input
+            ref={email}
             type="text"
             placeholder="Email Address"
             className="w-full p-3 mb-5 rounded-md bg-gray-800 border border-gray-600 text-white"
           />
 
           <input
+            ref={password}
             type="password"
             placeholder="Password"
             className="w-full p-3 mb-7 rounded-md bg-gray-800 border border-gray-600 text-white"
           />
+          <p
+            className={`text-red-600 text-sm italic rounded-md shadow-md mb-4 ${
+              !errorMessage ? "hidden" : ""
+            }`}
+          >
+            {errorMessage}
+          </p>
 
           <button
+            onClick={handleButtonClick}
             type="submit"
             className="w-full bg-red-600 text-white p-3 rounded-md font-semibold hover:bg-red-700 transition-colors"
           >
             {isSignInForm ? "Sign In" : "Sign Up"}
           </button>
-
           <div className="mt-4 text-gray-400 flex text-lg p-2">
             <span>
               {isSignInForm ? "New to StreamOracle?" : "Existing User?"}
