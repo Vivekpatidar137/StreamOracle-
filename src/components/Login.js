@@ -10,8 +10,10 @@ const Login = () => {
   const password = useRef(null);
 
   const handleButtonClick = () => {
+    const nameValue = !isSignInForm ? name.current?.value : null; // Use optional chaining to avoid errors if name is not rendered
+
     const message = checkValidData(
-      name.current.value,
+      nameValue,
       email.current.value,
       password.current.value
     );
