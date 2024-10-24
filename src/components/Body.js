@@ -8,18 +8,19 @@ import { useDispatch } from "react-redux";
 const Body = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         // User is signed in
-
         const { uid, email, displayName } = user;
-        dispatch(addUser({ uid: uid, email: email, displayName: displayName }));
+        dispatch(addUser({ uid, email, displayName }));
       } else {
         // User is signed out
         dispatch(removeUser());
       }
     });
-  }, []);
+
+    return () => unsubscribe(); // Cleanup subscription on component unmount
+  }, [dispatch]);
 
   return (
     <div>
