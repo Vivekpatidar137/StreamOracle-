@@ -4,31 +4,37 @@ import userIcon from "../myAssets/man.png";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { addUser, removeUser } from "../utils/userSlice";
+import { useDispatch } from "react-redux";
 
 const Header = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // Check if the user is logged in
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
+        // User is signed in
+        const { uid, email, displayName } = user;
+        dispatch(addUser({ uid, email, displayName }));
         setIsLoggedIn(true);
+        navigate("/browse");
       } else {
+        // User is signed out
+        dispatch(removeUser());
         setIsLoggedIn(false);
+        navigate("/");
       }
     });
+
     return () => unsubscribe(); // Cleanup subscription on component unmount
-  }, []);
+  }, [navigate, dispatch]);
 
   const handleSignOut = () => {
     signOut(auth)
-      .then(() => {
-        // Sign-out successful.
-        navigate("/");
-      })
+      .then(() => {})
       .catch((error) => {
-        // An error happened.
         navigate("/error");
       });
   };
