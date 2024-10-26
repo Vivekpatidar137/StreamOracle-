@@ -1,11 +1,17 @@
-import Header from "./Header"
+
+import useNowPlayingMovies from "../hooks/useNowPlayingMovies.js";
+import Header from "./Header";
+
+//import useNowPlayingMovies from "../hooks/useNowPlayingMovies"
 
 const Browse = () => {
+useNowPlayingMovies();
+
   return (
     <div>
       <Header />
-      </div>
-  )
-}
+    </div>
+  );
+};
 
-export default Browse
+export default Browse;
