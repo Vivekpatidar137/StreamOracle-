@@ -1,8 +1,8 @@
 
 import useNowPlayingMovies from "../hooks/useNowPlayingMovies.js";
 import Header from "./Header";
-
-//import useNowPlayingMovies from "../hooks/useNowPlayingMovies"
+import MainContainer from "./MainContainer.js";
+import SecondaryContainer from "./SecondaryContainer.js";
 
 const Browse = () => {
 useNowPlayingMovies();
@@ -10,6 +10,8 @@ useNowPlayingMovies();
   return (
     <div>
       <Header />
+      <MainContainer />
+      <SecondaryContainer />
     </div>
   );
 };
