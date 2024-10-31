@@ -6,7 +6,7 @@ const BackgroundVideo = ({ movieId }) => {
   const movieKey = currentTrailer?.key;
   useBackgroundTrailer(movieId);
   return (
-    <div className="w-screen">
+    <div className="w-screen relative">
       <iframe
         className="w-screen aspect-video h-full"
          src={`https://www.youtube.com/embed/${movieKey}?autoplay=1&mute=1&controls=0&loop=1&playlist=${movieKey}`}
