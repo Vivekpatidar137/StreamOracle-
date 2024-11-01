@@ -1,3 +1,6 @@
+import playButton from "../myAssets/play-button-arrowhead.png";
+import moreInfo from "../myAssets/info.png";
+
 const VideoTitle = ({ title, overview }) => {
   return (
     <div className="absolute bottom-24 left-10 lg:left-16 xl:left-20 text-white z-10 space-y-4 max-w-2xl">
@@ -8,11 +11,13 @@ const VideoTitle = ({ title, overview }) => {
         {overview}
       </p>
       <div className="flex gap-4 mt-4">
-        <button className="bg-white text-black font-semibold px-6 py-2 rounded-md hover:bg-gray-200 transition duration-200">
-          Play
+        <button className="bg-white text-black font-semibold px-6 py-2 rounded-md hover:bg-gray-200 transition duration-200 flex items-center gap-2 shadow-md hover:shadow-lg">
+          <img className="w-5 h-5" src={playButton} alt="Play Button" />
+          <span>Play</span>
         </button>
-        <button className="bg-gray-600 bg-opacity-80 text-white font-semibold px-6 py-2 rounded-md hover:bg-gray-500 transition duration-200">
-          More Info
+        <button className="bg-gray-700 text-white font-semibold px-6 py-2 rounded-md hover:bg-gray-600 transition duration-200 flex items-center gap-2 shadow-md hover:shadow-lg bg-opacity-90">
+          <img className="w-5 h-5 filter invert" src={moreInfo} alt="More Info" />
+          <span>More Info</span>
         </button>
       </div>
     </div>
