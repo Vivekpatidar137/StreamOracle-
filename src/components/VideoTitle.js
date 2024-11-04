@@ -3,7 +3,7 @@ import moreInfo from "../myAssets/info.png";
 
 const VideoTitle = ({ title, overview }) => {
   return (
-    <div className="absolute bottom-24 left-5 sm:left-8 md:left-10 lg:left-16 xl:left-20 text-white z-10 space-y-3 sm:space-y-4 max-w-xl sm:max-w-2xl">
+    <div className="absolute bottom-28 left-5 sm:left-8 md:left-10 lg:left-16 xl:left-20 text-white z-10 space-y-3 sm:space-y-4 max-w-xl sm:max-w-2xl">
       <h1 className="font-extrabold text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight">
         {title}
       </h1>

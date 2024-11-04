@@ -18,7 +18,7 @@ const MovieList = ({ title, movies }) => {
 
   return (
     <div className="relative space-y-4">
-      <h2 className="text-xl lg:text-2xl font-semibold mb-2 text-white px-4">
+      <h2 className="text-lg font-semibold text-white px-4">
         {title}
       </h2>
 
