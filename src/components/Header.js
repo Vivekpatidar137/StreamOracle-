@@ -1,11 +1,13 @@
 import { signOut, onAuthStateChanged } from "firebase/auth";
 import logo from "../myAssets/StreamOracle.png";
+import aiLogo from "../myAssets/intelligence.png";
 import userIcon from "../myAssets/man.png";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { addUser, removeUser } from "../utils/userSlice";
 import { useDispatch } from "react-redux";
+import { toggleAiSearchView } from "../utils/aiSlice";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -39,6 +41,9 @@ const Header = () => {
       });
   };
 
+  const handleRecommendedByAIClick = () => {
+    dispatch(toggleAiSearchView());
+  }
   return (
     <header className="absolute w-full top-0 z-20">
       <div className="relative flex justify-between items-center px-4 sm:px-8 md:px-10">
@@ -53,6 +58,21 @@ const Header = () => {
 
           {isLoggedIn && (
             <div className="flex items-center space-x-2 sm:space-x-4">
+              <button
+                className="relative flex items-center space-x-2 group px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500 rounded-md"
+                onClick={handleRecommendedByAIClick}
+              >
+                <img
+                  src={aiLogo}
+                  alt="AI Logo"
+                  className="w-5 sm:w-6 h-5 sm:h-6 filter invert group-hover:scale-110 transition-transform duration-300"
+                />
+                <p className="text-white text-sm sm:text-base font-semibold tracking-wide group-hover:text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-blue-500 transition duration-300 transform group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-pink-500/50">
+                  Oracle AI
+                </p>
+                <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-gradient-to-r from-pink-500 to-blue-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+              </button>
+
               <img
                 className="w-8 sm:w-10 h-8 sm:h-10"
                 src={userIcon}
