@@ -1,7 +1,10 @@
+import AiSearchBar from "./AiSearchBar"
 
 const RecommendedByAI = () => {
   return (
-    <div>RecommendedByAI</div>
+    <div>
+      <AiSearchBar />
+    </div>
   )
 }
 
