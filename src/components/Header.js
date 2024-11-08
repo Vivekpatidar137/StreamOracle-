@@ -6,10 +6,13 @@ import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { addUser, removeUser } from "../utils/userSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toggleAiSearchView } from "../utils/aiSlice";
+import { SUPPORTED_LANGUAGES } from "../utils/constant";
+import { changeLanguage } from "../utils/configSlice";
 
 const Header = () => {
+  const showAiSearch = useSelector((store) => store.oracleAi.showAiSearch);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -43,7 +46,12 @@ const Header = () => {
 
   const handleRecommendedByAIClick = () => {
     dispatch(toggleAiSearchView());
-  }
+  };
+
+  const handleLanguageChange = (e) => {
+    dispatch(changeLanguage(e.target.value));
+  };
+
   return (
     <header className="absolute w-full top-0 z-20">
       <div className="relative flex justify-between items-center px-4 sm:px-8 md:px-10">
@@ -58,6 +66,15 @@ const Header = () => {
 
           {isLoggedIn && (
             <div className="flex items-center space-x-2 sm:space-x-4">
+              {showAiSearch && (
+                <select onChange={handleLanguageChange}>
+                  {SUPPORTED_LANGUAGES.map((lang) => (
+                    <option key={lang.identifier} value={lang.identifier}>
+                      {lang.name}
+                    </option>
+                  ))}
+                </select>
+              )}
               <button
                 className="relative flex items-center space-x-2 group px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500 rounded-md"
                 onClick={handleRecommendedByAIClick}
