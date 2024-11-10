@@ -15,3 +15,8 @@ export const SUPPORTED_LANGUAGES = [
   { identifier: "french", name: "French" },
   { identifier: "spanish", name: "Spanish" },
 ];
+
+export const AI_STUDIO_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key="
+
+// Access environment variable from .env
+export const apiKey = process.env.REACT_APP_GOOGLE_API_KEY;
