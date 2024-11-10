@@ -6,7 +6,7 @@ const AiSearchBar = () => {
 
   return (
     <div className="flex justify-center pt-20 sm:pt-32">
-      <form className="relative w-4/5 sm:w-3/5 lg:w-1/2">
+      <form className="relative w-4/5 sm:w-3/5 lg:w-1/2" onSubmit={(e) => e.preventDefault()}>
         <input
           type="text"
           placeholder={lang[selectedLanguage].oracleAiPlaceholder}
