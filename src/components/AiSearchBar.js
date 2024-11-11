@@ -1,18 +1,30 @@
 import { useSelector } from "react-redux";
 import lang from "../utils/languageConstant";
-import { useEffect, useRef } from "react";
-import { AI_STUDIO_URL, apiKey } from "../utils/constant";
+import { useRef } from "react";
+import { AI_STUDIO_URL, API_OPTIONS, apiKey } from "../utils/constant";
 
 const AiSearchBar = () => {
   const selectedLanguage = useSelector((store) => store.config.lang);
   const searchText = useRef(null);
 
+  const searchTMDBMovies = async (movie) => {
+    const data = await fetch(
+      "https://api.themoviedb.org/3/search/movie?query=" +
+        movie +
+        "&include_adult=false&language=en-US&page=1",
+      API_OPTIONS
+    );
+    const json = await data.json();
+    return json;
+  };
+
   const handleAiSearch = async () => {
     console.log(searchText.current.value);
+
     const aiQuery =
       "Act as Movie Recommendation system and suggest Movies for the query: " +
       searchText.current.value +
-      ". only give me names of 5 movies, comma separated like the example result given ahead. Example Result: The Shawshank Redemption, The Godfather, The Dark Knight, The Godfather Part II, 12 Angry Men";
+      ". only give me names of 5 movies just movies not series make sure, comma separated like the example result given ahead. Example Result: The Shawshank Redemption, The Godfather, The Dark Knight, The Godfather Part II, 12 Angry Men";
 
     const aiResult = await fetch(AI_STUDIO_URL + apiKey, {
       method: "POST",
@@ -24,13 +36,23 @@ const AiSearchBar = () => {
       }),
     });
 
-    const result = await aiResult.json();
-    console.log(result);
-  };
+    const json = await aiResult.json();
 
-  useEffect(() => {
-    handleAiSearch();
-  }, []);
+    const aiMovieList =
+      json?.candidates?.[0]?.content?.parts?.[0]?.text?.split(",") || [];
+    console.log(aiMovieList);
+
+    if (!aiMovieList) {
+      console.error("AI movie list is empty or not formatted correctly.");
+      return;
+    }
+
+    const promiseArray = aiMovieList.map((movie) =>
+      searchTMDBMovies(movie.trim())
+    );
+    const searchedMoviesResults = await Promise.all(promiseArray);
+    console.log(searchedMoviesResults);
+  };
 
   return (
     <div className="flex justify-center pt-20 sm:pt-32">
