@@ -1,10 +1,12 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import lang from "../utils/languageConstant";
 import { useRef } from "react";
 import { AI_STUDIO_URL, API_OPTIONS, apiKey } from "../utils/constant";
+import { addAiResult } from "../utils/aiSlice";
 
 const AiSearchBar = () => {
   const selectedLanguage = useSelector((store) => store.config.lang);
+  const dispatch = useDispatch();
   const searchText = useRef(null);
 
   const searchTMDBMovies = async (movie) => {
@@ -19,8 +21,6 @@ const AiSearchBar = () => {
   };
 
   const handleAiSearch = async () => {
-    console.log(searchText.current.value);
-
     const aiQuery =
       "Act as Movie Recommendation system and suggest Movies for the query: " +
       searchText.current.value +
@@ -39,8 +39,9 @@ const AiSearchBar = () => {
     const json = await aiResult.json();
 
     const aiMovieList =
-      json?.candidates?.[0]?.content?.parts?.[0]?.text?.split(",") || [];
-    console.log(aiMovieList);
+      json?.candidates?.[0]?.content?.parts?.[0]?.text
+        ?.split(",")
+        .map((movie) => movie.trim()) || [];
 
     if (!aiMovieList) {
       console.error("AI movie list is empty or not formatted correctly.");
@@ -50,8 +51,27 @@ const AiSearchBar = () => {
     const promiseArray = aiMovieList.map((movie) =>
       searchTMDBMovies(movie.trim())
     );
+
     const searchedMoviesResults = await Promise.all(promiseArray);
-    console.log(searchedMoviesResults);
+
+    const filteredMovies = searchedMoviesResults
+      .map((movieResult, index) => {
+        const aiMovieName = aiMovieList[index];
+
+        const exactMatches = movieResult.results.filter(
+          (movie) => movie.title.toLowerCase() === aiMovieName.toLowerCase()
+        );
+
+        return exactMatches.length > 0 ? exactMatches[0] : null;
+      })
+      .filter(Boolean);
+
+    dispatch(
+      addAiResult({
+        movieNames: aiMovieList,
+        moviesData: filteredMovies,
+      })
+    );
   };
 
   return (
