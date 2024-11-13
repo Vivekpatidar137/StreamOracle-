@@ -1,5 +1,6 @@
 import AiSearchBar from "./AiSearchBar"
 import backgroundImg from "../myAssets/background .jpg";
+import AiMovieSuggestions from "./AiMovieSuggestions";
 
 const RecommendedByAI = () => {
   return (
@@ -11,6 +12,7 @@ const RecommendedByAI = () => {
     />
     <div className="relative z-10">
       <AiSearchBar />
+      <AiMovieSuggestions />
     </div>
   </div>
   )
