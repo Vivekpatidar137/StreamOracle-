@@ -19,7 +19,7 @@ const Browse = () => {
   useUpcomingMovies();
 
   return (
-    <div>
+    <div className="overflow-x-hidden">
       <Header />
       {showAiSearchView ? (
         <RecommendedByAI />
