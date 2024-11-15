@@ -24,7 +24,7 @@ const AiSearchBar = () => {
     const aiQuery =
       "Act as Movie Recommendation system and suggest Movies for the query: " +
       searchText.current.value +
-      ". only give me names of 5 movies just movies not series make sure, comma separated like the example result given ahead. Example Result: The Shawshank Redemption, The Godfather, The Dark Knight, The Godfather Part II, 12 Angry Men";
+      ". only give me names of 10 movies just movies not series make sure, comma separated like the example result given ahead. Example Result: The Shawshank Redemption, The Godfather, The Dark Knight, The Godfather Part II, 12 Angry Men, The Lord of the Rings: The Return of the King, Inception, Pulp Fiction, Schindler's List, Fight Club";
 
     const aiResult = await fetch(AI_STUDIO_URL + apiKey, {
       method: "POST",
