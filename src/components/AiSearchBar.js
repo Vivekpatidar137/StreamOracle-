@@ -10,68 +10,86 @@ const AiSearchBar = () => {
   const searchText = useRef(null);
 
   const searchTMDBMovies = async (movie) => {
-    const data = await fetch(
-      "https://api.themoviedb.org/3/search/movie?query=" +
-        movie +
-        "&include_adult=false&language=en-US&page=1",
-      API_OPTIONS
-    );
-    const json = await data.json();
-    return json;
+    try {
+      const response = await fetch(
+        "https://api.themoviedb.org/3/search/movie?query=" +
+          movie +
+          "&include_adult=false&language=en-US&page=1",
+        API_OPTIONS
+      );
+
+      if (!response.ok) {
+        throw new Error(`TMDB API error: ${response.statusText}`);
+      }
+
+      const json = await response.json();
+      return json;
+    } catch (error) {
+      console.error("Error fetching TMDB movies:", error);
+      return { results: [] };
+    }
   };
 
   const handleAiSearch = async () => {
-    const aiQuery =
-      "Act as Movie Recommendation system and suggest Movies for the query: " +
-      searchText.current.value +
-      ". only give me names of 10 movies just movies not series make sure, comma separated like the example result given ahead. Example Result: The Shawshank Redemption, The Godfather, The Dark Knight, The Godfather Part II, 12 Angry Men, The Lord of the Rings: The Return of the King, Inception, Pulp Fiction, Schindler's List, Fight Club";
+    try {
+      const aiQuery =
+        "Act as Movie Recommendation system and suggest Movies for the query: " +
+        searchText.current.value +
+        ". only give me names of 10 movies just movies not series make sure, comma separated like the example result given ahead. Example Result: The Shawshank Redemption, The Godfather, The Dark Knight, The Godfather Part II, 12 Angry Men, The Lord of the Rings: The Return of the King, Inception, Pulp Fiction, Schindler's List, Fight Club";
 
-    const aiResult = await fetch(AI_STUDIO_URL + apiKey, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        contents: [{ parts: [{ text: aiQuery }] }],
-      }),
-    });
+      const aiResponse = await fetch(AI_STUDIO_URL + apiKey, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: aiQuery }] }],
+        }),
+      });
 
-    const json = await aiResult.json();
+      if (!aiResponse.ok) {
+        throw new Error(`AI API error: ${aiResponse.statusText}`);
+      }
 
-    const aiMovieList =
-      json?.candidates?.[0]?.content?.parts?.[0]?.text
-        ?.split(",")
-        .map((movie) => movie.trim()) || [];
+      const aiJson = await aiResponse.json();
 
-    if (!aiMovieList) {
-      console.error("AI movie list is empty or not formatted correctly.");
-      return;
+      const aiMovieList =
+        aiJson?.candidates?.[0]?.content?.parts?.[0]?.text
+          ?.split(",")
+          .map((movie) => movie.trim()) || [];
+
+      if (!aiMovieList.length) {
+        console.error("AI movie list is empty or not formatted correctly.");
+        return;
+      }
+
+      const promiseArray = aiMovieList.map((movie) =>
+        searchTMDBMovies(movie.trim())
+      );
+
+      const searchedMoviesResults = await Promise.all(promiseArray);
+
+      const filteredMovies = searchedMoviesResults
+        .map((movieResult, index) => {
+          const aiMovieName = aiMovieList[index];
+
+          const exactMatches = movieResult.results.filter(
+            (movie) => movie.title.toLowerCase() === aiMovieName.toLowerCase()
+          );
+
+          return exactMatches.length > 0 ? exactMatches[0] : null;
+        })
+        .filter(Boolean);
+
+      dispatch(
+        addAiResult({
+          movieNames: aiMovieList,
+          moviesData: filteredMovies,
+        })
+      );
+    } catch (error) {
+      console.error("Error in AI search process:", error);
     }
-
-    const promiseArray = aiMovieList.map((movie) =>
-      searchTMDBMovies(movie.trim())
-    );
-
-    const searchedMoviesResults = await Promise.all(promiseArray);
-
-    const filteredMovies = searchedMoviesResults
-      .map((movieResult, index) => {
-        const aiMovieName = aiMovieList[index];
-
-        const exactMatches = movieResult.results.filter(
-          (movie) => movie.title.toLowerCase() === aiMovieName.toLowerCase()
-        );
-
-        return exactMatches.length > 0 ? exactMatches[0] : null;
-      })
-      .filter(Boolean);
-
-    dispatch(
-      addAiResult({
-        movieNames: aiMovieList,
-        moviesData: filteredMovies,
-      })
-    );
   };
 
   return (
