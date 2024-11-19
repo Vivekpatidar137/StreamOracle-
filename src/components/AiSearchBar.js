@@ -95,28 +95,28 @@ const AiSearchBar = () => {
   return (
     <div className="flex justify-center pt-20 sm:pt-32">
       <form
-        className="relative w-4/5 sm:w-3/5 lg:w-1/2"
+        className="flex items-center w-4/5 sm:w-3/5 lg:w-1/2 bg-gray-800 bg-opacity-90 rounded-full shadow-lg overflow-hidden"
         onSubmit={(e) => e.preventDefault()}
       >
         <input
           ref={searchText}
           type="text"
           placeholder={lang[selectedLanguage].oracleAiPlaceholder}
-          className="w-full py-3 sm:py-4 pl-5 pr-16 text-base sm:text-lg md:text-xl text-white bg-gray-800 bg-opacity-90 rounded-full shadow-lg outline-none 
-                       transition duration-300 ease-in-out transform hover:scale-105 focus:scale-105 
-                       focus:ring-4 focus:ring-pink-500 placeholder-gray-400"
+          className="flex-grow py-3 sm:py-4 pl-5 text-base sm:text-lg md:text-xl text-white bg-transparent outline-none 
+                       placeholder-gray-400"
         />
         <button
           onClick={handleAiSearch}
           type="submit"
-          className="absolute top-1/2 right-5 transform -translate-y-1/2 px-6 py-2 bg-gradient-to-r from-pink-500 to-blue-500 
-                       text-white font-semibold rounded-full shadow-md hover:scale-110 transition-all duration-300"
+          className="flex-shrink-0 px-6 py-3 bg-gradient-to-r from-pink-500 to-blue-500 text-white font-semibold 
+                       shadow-md transition-all duration-300 hover:scale-105"
         >
           {lang[selectedLanguage].search}
         </button>
       </form>
     </div>
   );
+  
 };
 
 export default AiSearchBar;
