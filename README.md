@@ -1,70 +1,80 @@
-# Getting Started with Create React App
+# 🎥 **StreamOracle**
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+StreamOracle is a movie recommendation web application that blends **advanced AI search capabilities** with a visually immersive, Netflix-like user interface. Discover movies by describing your preferences, watch trailers, and explore categorized movie lists, all in a sleek, responsive design.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## ✨ **Features**
 
-### `npm start`
+### 🔮 **AI-Powered Movie Recommendations**
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Search by Description:** Describe your ideal movie, and let AI recommend perfect matches.
+- **AI Integration:** Leverages advanced APIs to deliver high-quality, relevant suggestions.
+- **Multi-Language Support:**
+  - 🌍 Supports English, Hindi, French, and Spanish.
+  - Dynamic placeholders and buttons adapt to the selected language for a localized experience.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 🎞️ **Dynamic Movie Lists**
 
-### `npm test`
+- **Categories:** Curated lists like _Now Playing, Popular, Top Rated,_ and _Upcoming._
+- **Real-Time Data:** Powered by the TMDB API to ensure content is always up-to-date.
+- **Netflix-Inspired Design:** Elegant and user-friendly.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 📽️ **Responsive Trailer Playback**
 
-### `npm run build`
+- **Background Trailers:** Enjoy cinematic movie trailers dynamically playing in the background.
+- **Adaptive UI:** Trailers are responsive and maintain visual appeal across devices.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 🎨 **Customizable UI**
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- **Dark Theme:** A Netflix-inspired dramatic design with vibrant overlays.
+- **Responsive Design:** Built using **Tailwind CSS** for a seamless experience on all devices.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 🔒 **User Authentication**
 
-### `npm run eject`
+- **Secure Access:** Firebase Authentication ensures a safe and secure user experience.
+- **Session Management:** Real-time session updates using Firebase.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### ⚡ **Redux Integration**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- **State Management:** Efficient handling of movie data, authentication, and AI recommendations.
+- **Optimized Performance:** Memoized selectors prevent redundant API calls.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+---
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## 🛠️ **Core Components**
 
-## Learn More
+### 🔎 **AiSearchBar**
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- **Interactive Search:** Describe your movie and get AI-powered recommendations.
+- **Overflow Fix:** Smooth user experience with no text overlap.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 🎥 **AiMovieSuggestions**
 
-### Code Splitting
+- **Reusable Components:** Displays AI-recommended movies in a polished design.
+- **Visual Appeal:** Includes gradient borders, soft shadows, and responsive dimensions.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### 🖥️ **MainContainer**
 
-### Analyzing the Bundle Size
+- **Unified Layout:** Combines dynamic trailers with overlay movie details for a cohesive experience.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### 🎬 **MovieList and MovieCard**
 
-### Making a Progressive Web App
+- **Dynamic Rendering:** Interactive cards for categorized movie lists.
+- **Scroll Optimization:** Smooth horizontal scrolling without layout glitches.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### 📺 **BackgroundVideo**
 
-### Advanced Configuration
+- **Trailer Integration:** Dynamically fetches and plays movie trailers.
+- **Full-Screen Experience:** Trailers seamlessly fill the entire viewport.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+---
 
-### Deployment
+## 🚀 **Technologies Used**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+| **Frontend** | **Backend**             | **APIs**   | **State Management** |
+| ------------ | ----------------------- | ---------- | -------------------- |
+| React        | Firebase Authentication | TMDB API   | Redux Toolkit        |
+| Tailwind CSS | Firebase Hosting        | Gemini API | React Redux          |
 
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
