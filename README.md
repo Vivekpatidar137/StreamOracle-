@@ -78,3 +78,15 @@ StreamOracle is a movie recommendation web application that blends **advanced AI
 | Tailwind CSS | Firebase Hosting        | Gemini API | React Redux          |
 
 ---
+
+## 🎯 Screenshots
+
+### Main Page
+
+![StreamOracle Main Page - Screenshot 1](src/myAssets/Screenshot1.png)
+![StreamOracle Main Page - Screenshot 2](src/myAssets/Screenshot2.png)
+![StreamOracle Main Page - Screenshot 3](src/myAssets/Screenshot3.png)
+![StreamOracle Main Page - Screenshot 4](src/myAssets/Screenshot4.png)
+![StreamOracle Main Page - Screenshot 5](src/myAssets/Screenshot5.png)
+![StreamOracle Main Page - Screenshot 6](src/myAssets/Screenshot6.png)
+![StreamOracle Main Page - Screenshot 7](src/myAssets/Screenshot7.png)
