@@ -83,10 +83,17 @@ StreamOracle is a movie recommendation web application that blends **advanced AI
 
 ### Main Page
 
-![StreamOracle Main Page - Screenshot 1](src/myAssets/Screenshot1.png)
-![StreamOracle Main Page - Screenshot 2](src/myAssets/Screenshot2.png)
-![StreamOracle Main Page - Screenshot 3](src/myAssets/Screenshot3.png)
-![StreamOracle Main Page - Screenshot 4](src/myAssets/Screenshot4.png)
-![StreamOracle Main Page - Screenshot 5](src/myAssets/Screenshot5.png)
-![StreamOracle Main Page - Screenshot 6](src/myAssets/Screenshot6.png)
-![StreamOracle Main Page - Screenshot 7](src/myAssets/Screenshot7.png)
+![StreamOracle Main Page - Screenshot 1](docs/Screenshot1.png)
+![StreamOracle Main Page - Screenshot 2](docs/Screenshot2.png)
+![StreamOracle Main Page - Screenshot 3](docs/Screenshot3.png)
+![StreamOracle Main Page - Screenshot 4](docs/Screenshot4.png)
+![StreamOracle Main Page - Screenshot 5](docs/Screenshot5.png)
+![StreamOracle Main Page - Screenshot 6](docs/Screenshot6.png)
+![StreamOracle Main Page - Screenshot 7](docs/Screenshot7.png)
+
+### AI Movie Recommendations
+
+![AI Recommendations - Screenshot 1](docs/AI-ss1.png)
+![AI Recommendations - Screenshot 1](docs/AI-ss2.png)
+![AI Recommendations - Screenshot 1](docs/AI-ss3.png)
+
