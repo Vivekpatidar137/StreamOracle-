@@ -97,3 +97,10 @@ StreamOracle is a movie recommendation web application that blends **advanced AI
 ![AI Recommendations - Screenshot 1](docs/AI-ss2.png)
 ![AI Recommendations - Screenshot 1](docs/AI-ss3.png)
 
+### 📱 Mobile View
+
+![Mobile View - Screenshot 1](docs/MobileView-Screenshot1.png)
+![Mobile View - Screenshot 2](docs/MobileView-Screenshot2.png)
+![Mobile View - Screenshot 3](docs/MobileView-Screenshot3.png)
+![Mobile View - Screenshot 3](docs/MobileView-Screenshot4.png)
+
