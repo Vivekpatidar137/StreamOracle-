@@ -104,3 +104,4 @@ StreamOracle is a movie recommendation web application that blends **advanced AI
 ![Mobile View - Screenshot 3](docs/MobileView-Screenshot3.png)
 ![Mobile View - Screenshot 3](docs/MobileView-Screenshot4.png)
 
+Made with ❤️ by Vivek Patidar.
