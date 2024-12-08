@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import lang from "../utils/languageConstant";
 import { useRef } from "react";
 import { AI_STUDIO_URL, API_OPTIONS, apiKey } from "../utils/constant";
-import { addAiResult } from "../utils/aiSlice";
+import { addAiResult, setLoading } from "../utils/aiSlice";
 
 const AiSearchBar = () => {
   const selectedLanguage = useSelector((store) => store.config.lang);
@@ -32,6 +32,7 @@ const AiSearchBar = () => {
 
   const handleAiSearch = async () => {
     try {
+      dispatch(setLoading(true));
       const aiQuery =
         "Act as Movie Recommendation system and suggest Movies for the query: " +
         searchText.current.value +
@@ -89,6 +90,9 @@ const AiSearchBar = () => {
       );
     } catch (error) {
       console.error("Error in AI search process:", error);
+    } finally {
+      // Stop loading
+      dispatch(setLoading(false));
     }
   };
 
@@ -116,7 +120,6 @@ const AiSearchBar = () => {
       </form>
     </div>
   );
-  
 };
 
 export default AiSearchBar;
