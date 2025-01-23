@@ -4,6 +4,7 @@ import Browse from "./components/Browse";
 import Login from "./components/Login";
 import { Provider } from "react-redux";
 import appStore from "./utils/appStore";
+import MovieDetails from "./components/MovieDetails";
 
 function App() {
   const appRouter = createBrowserRouter([
@@ -18,6 +19,10 @@ function App() {
     {
       path: "/login",
       element: <Login />,
+    },
+    {
+      path: "/movie/:id", // Add dynamic route for MovieDetails
+      element: <MovieDetails />,
     },
   ]);
 

@@ -1,6 +1,6 @@
 import MovieCard from "./MovieCard";
 import { useRef } from "react";
-
+import { Link } from "react-router-dom";
 const MovieList = ({ title, movies }) => {
   const scrollRef = useRef(null);
 
@@ -13,14 +13,14 @@ const MovieList = ({ title, movies }) => {
   };
 
   if (!movies || movies.length === 0) {
-    return <p className="text-white">{title} movies are currently unavailable</p>;
+    return (
+      <p className="text-white">{title} movies are currently unavailable</p>
+    );
   }
 
   return (
     <div className="relative space-y-4">
-      <h2 className="text-lg font-semibold text-white px-4">
-        {title}
-      </h2>
+      <h2 className="text-lg font-semibold text-white px-4">{title}</h2>
 
       {/* Left Arrow */}
       <button
@@ -40,13 +40,14 @@ const MovieList = ({ title, movies }) => {
         <span className="text-4xl">›</span>
       </button>
 
-      {/* Movie List */}
       <div
         ref={scrollRef}
         className="flex space-x-4 overflow-x-scroll scrollbar-hide p-2 px-4"
       >
         {movies.map((movie) => (
-          <MovieCard key={movie.id} poster={movie?.poster_path} />
+          <Link to={`/movie/${movie.id}`} key={movie.id}>
+            <MovieCard poster={movie?.poster_path} />
+          </Link>
         ))}
       </div>
     </div>
