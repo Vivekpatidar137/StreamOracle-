@@ -2,13 +2,14 @@ import { useParams } from "react-router-dom";
 import useFetchDetails from "../hooks/useFetchDetails";
 import { IMAGE_CDN_URL } from "../utils/constant";
 import { FaCalendarAlt, FaClock, FaStar } from "react-icons/fa";
+import MovieDetailsShimmer from "./MovieDetailsShimmer";
 
 const MovieDetails = () => {
   const { id } = useParams();
   const movieDetails = useFetchDetails(id);
 
   if (!movieDetails) {
-    return <div className="text-center py-20">Loading...</div>;
+    return <MovieDetailsShimmer />;
   }
 
   const {
