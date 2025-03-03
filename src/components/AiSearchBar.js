@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import lang from "../utils/languageConstant";
 import { useRef } from "react";
-import { AI_STUDIO_URL, API_OPTIONS, apiKey } from "../utils/constant";
 import { addAiResult, setLoading } from "../utils/aiSlice";
+import { fetchFromGemini, fetchFromTMDB } from "../utils/api";
 
 const AiSearchBar = () => {
   const selectedLanguage = useSelector((store) => store.config.lang);
@@ -11,18 +11,11 @@ const AiSearchBar = () => {
 
   const searchTMDBMovies = async (movie) => {
     try {
-      const response = await fetch(
-        "https://api.themoviedb.org/3/search/movie?query=" +
-          movie +
-          "&include_adult=false&language=en-US&page=1",
-        API_OPTIONS
+      const json = await fetchFromTMDB(
+        `search/movie?query=${encodeURIComponent(
+          movie
+        )}&include_adult=false&language=en-US&page=1`
       );
-
-      if (!response.ok) {
-        throw new Error(`TMDB API error: ${response.statusText}`);
-      }
-
-      const json = await response.json();
       return json;
     } catch (error) {
       console.error("Error fetching TMDB movies:", error);
@@ -38,21 +31,7 @@ const AiSearchBar = () => {
         searchText.current.value +
         ". only give me names of 10 movies just movies not series make sure, comma separated like the example result given ahead. Example Result: The Shawshank Redemption, The Godfather, The Dark Knight, The Godfather Part II, 12 Angry Men, The Lord of the Rings: The Return of the King, Inception, Pulp Fiction, Schindler's List, Fight Club";
 
-      const aiResponse = await fetch(AI_STUDIO_URL + apiKey, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          contents: [{ parts: [{ text: aiQuery }] }],
-        }),
-      });
-
-      if (!aiResponse.ok) {
-        throw new Error(`AI API error: ${aiResponse.statusText}`);
-      }
-
-      const aiJson = await aiResponse.json();
+      const aiJson = await fetchFromGemini([{ parts: [{ text: aiQuery }] }]);
 
       const aiMovieList =
         aiJson?.candidates?.[0]?.content?.parts?.[0]?.text
