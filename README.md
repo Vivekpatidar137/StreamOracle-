@@ -42,6 +42,24 @@ StreamOracle is a movie recommendation web application that blends **advanced AI
 
 ---
 
+## 🚀 **Hosting Implementation**
+
+### **Frontend: Firebase Hosting**
+
+- **Deployment:** The frontend (React app) is hosted on **Firebase Hosting** for fast, global delivery.
+- **Custom Domains:** Accessible via:
+  - `https://stream-oracle.web.app`
+  - `https://stream-oracle.firebaseapp.com`
+- **SPA Support:** Configured to serve `index.html` for all routes, enabling seamless navigation in a single-page application.
+
+### **Backend: Netlify Functions**
+
+- **Serverless Functions:** Backend logic (e.g., TMDB and Gemini API calls) is handled by **Netlify Functions**.
+- **Local Development:** Netlify Dev simulates the production environment locally for testing.
+- **CORS Handling:** Functions are configured to allow requests from the Firebase frontend domains.
+
+---
+
 ## 🛠️ **Core Components**
 
 ### 🔎 **AiSearchBar**
@@ -76,6 +94,7 @@ StreamOracle is a movie recommendation web application that blends **advanced AI
 | ------------ | ----------------------- | ---------- | -------------------- |
 | React        | Firebase Authentication | TMDB API   | Redux Toolkit        |
 | Tailwind CSS | Firebase Hosting        | Gemini API | React Redux          |
+|              | Netlify Functions       |            |                      |
 
 ---
 
