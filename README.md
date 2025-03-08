@@ -49,7 +49,6 @@ StreamOracle is a movie recommendation web application that blends **advanced AI
 - **Deployment:** The frontend (React app) is hosted on **Firebase Hosting** for fast, global delivery.
 - **Custom Domains:** Accessible via:
   - `https://stream-oracle.web.app`
-  - `https://stream-oracle.firebaseapp.com`
 - **SPA Support:** Configured to serve `index.html` for all routes, enabling seamless navigation in a single-page application.
 
 ### **Backend: Netlify Functions**
