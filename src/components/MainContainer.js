@@ -1,11 +1,12 @@
-// MainContainer.jsx
 import { useSelector } from "react-redux";
 import BackgroundVideo from "./BackgroundVideo";
 import VideoTitle from "./VideoTitle";
+import { HeroShimmer } from "./Shimmer";
 
 const MainContainer = () => {
   const movies = useSelector((store) => store.movies?.nowPlayingMovies);
-  if (!movies) return null;
+
+  if (!movies) return <HeroShimmer />;
 
   const playingMovie = movies[0];
   const { original_title, overview, id } = playingMovie;

@@ -1,12 +1,12 @@
 import { useSelector } from "react-redux";
 import MovieList from "./MovieList";
-import Shimmer from "./Shimmer";
+import { AiCardShimmer } from "./Shimmer";
 
 const AiMovieSuggestions = () => {
   const { moviesData, loading } = useSelector((store) => store.oracleAi);
 
   if (loading) {
-    return <Shimmer />;
+    return <AiCardShimmer />; // Show shimmer effect while loading
   }
 
   if (!moviesData) return null;
