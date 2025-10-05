@@ -29,10 +29,8 @@ exports.handler = async function (event) {
       };
     }
 
-    // Set up the URL for the Gemini API
-    const AI_STUDIO_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${process.env.GEMINI_API_KEY}`;
+    const AI_STUDIO_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key=${process.env.GEMINI_API_KEY}`;
 
-    // Make the request to Gemini API
     const response = await fetch(AI_STUDIO_URL, {
       method: "POST",
       headers: {
@@ -42,9 +40,11 @@ exports.handler = async function (event) {
     });
 
     if (!response.ok) {
-      const errorData = await response.json();
-      console.error("Gemini API error:", errorData); // Log the error details
-      throw new Error(`Gemini API error: ${response.statusText}`);
+      const errorData = await response.json().catch(() => ({}));
+      console.error("Gemini API error:", errorData);
+      throw new Error(
+        `Gemini API error: ${response.status} ${response.statusText}`
+      );
     }
 
     const data = await response.json();
